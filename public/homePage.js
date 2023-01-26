@@ -38,9 +38,9 @@ let money = new MoneyManager();
 function showMessage(response){
     if (response.success){
         ProfileWidget.showProfile(response.data);
-        money.setMessage(false, "Операция прошла успешно");
+        money.setMessage(true, String("Операция прошла успешно"));
     } else {
-        money.setMessage(true, response.data);
+        money.setMessage(false, String(response.error));
     };
 };
 
@@ -90,9 +90,9 @@ favorites.addUserCallback = function(data){
     ApiConnector.addUserToFavorites(data, (response) => {
         if (response.success){
             fillTable(response);
-            favorites.setMessage(true, `${userName} успешно добавлен`);
+            favorites.setMessage(true, String(`${userName} успешно добавлен`));
         }   else {
-            favorites.setMessage(false, response.data);
+            favorites.setMessage(false, String(response.error));
         }
     });
 }
@@ -103,9 +103,9 @@ favorites.removeUserCallback = function(data){
     ApiConnector.removeUserFromFavorites(data, (response) => {
         if (response.success){
             fillTable(response);
-            favorites.setMessage(true, `адрес с ID ${userId} успешно удален`);
+            favorites.setMessage(true,String(`адрес с ID ${userId} успешно удален`));
         }   else {
-            favorites.setMessage(false,response.data);
+            favorites.setMessage(false,String(response.error));
         }
     });
 }
